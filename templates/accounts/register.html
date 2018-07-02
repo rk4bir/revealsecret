@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<div style="margin-top: 120px"></div>
+    <div class="col-md-8 offset-md-2 mt-5 bg-white">
+    	<div class="row">
+            <div class="col">
+            	<h2 class="text-dark pt-3">
+            		<strong>Registration</strong>
+            	</h2>
+            </div>
+        </div>
+        <hr>
+        {% if info != "" %}
+	        <div class="row mt-2 mb-2">
+	            <div class="col text-danger">
+	            	<strong>*{{ info }}</strong>
+	            </div>
+	        </div>
+        {% endif %}
+    	<form method="POST" action="">{% csrf_token %}
+	        <div class="row">
+		        <div class="col-md-8 form-group input-group">
+					<div class="input-group-prepend">
+					    <span class="input-group-text"> <i style="font-size: 0.95em" class="fa fa-user-o"></i> </span>
+					 </div>
+			        <input class="form-control" id="username" name="username" placeholder="Username" type="text" required>
+			    </div> <!-- form-group// -->
+			    <div class="col-md-4 ml-0">
+	                <div class="form-control-feedback">
+	                    <small id="usrMessage" class="align-middle">
+	                        <i class="fa fa-info-circle text-danger"> Use letters, numbers and _</i>
+	                    </small>
+	                </div>
+	            </div>
+	        </div>
+
+	        <div class="row">
+		        <div class="col-md-8 form-group input-group">
+			    	<div class="input-group-prepend">
+					    <span class="input-group-text"> <i style="font-size: 0.9em" class="fa fa-envelope-o"></i> </span>
+					 </div>
+			        <input class="form-control" id="email" name="email" placeholder="Email address" type="text" required>
+			    </div> <!-- form-group// -->
+			    <div class="col-md-4 ml-0">
+	                <div class="form-control-feedback">
+	                    <small id="emailMessage" class="align-middle">
+	                        <i class="text-danger fa fa-info-circle"> Required field</i>
+	                    </small>
+	                </div>
+	            </div>
+	        </div>
+
+
+	        <div class="row">
+		        <div class="col-md-8 form-group input-group">
+			    	<div class="input-group-prepend">
+					    <span class="input-group-text"> <i style="font-size: 1.4em" class="fa fa-lock"></i> </span>
+					</div>
+			        <input class="form-control" id="password"  placeholder="Password" name="password" type="password" required>
+			    </div> <!-- form-group// -->     
+			    <div class="col-md-4 ml-0">
+	                <div class="form-control-feedback">
+	                    <small id="passwordMessage" class="align-middle">
+	                        <i class="text-danger  fa fa-info-circle"> Required field</i>
+	                    </small>
+	                </div>
+	            </div>
+	        </div>
+
+	         <div class="row">
+		        <div class="col-md-8 form-group input-group">
+			    	<div class="input-group-prepend">
+					    <span class="input-group-text"> <i style="font-size: 1.1em" class="fa fa-repeat"></i> </span>
+					</div>
+			        <input class="form-control" name="re_password" placeholder="Confirm password" id="re_password" type="password" required>
+			    </div> <!-- form-group// -->     
+			    <div class="col-md-4 ml-0">
+	                <div class="form-control-feedback">
+	                    <small id="repasswordMessage" class="align-middle">
+	                        <i class="text-danger fa fa-info-circle"> Required field</i>
+	                    </small>
+	                </div>
+	            </div>
+	        </div>
+
+	        <div class="row ">
+	            <div class="col text-left">
+	                <button   type="submit" class="ml-0 btn btn-success btn-md"><i class="fa fa-user-plus"></i> Register</button>
+	            </div>
+	        </div>
+	    </form>
+	    <div class="row mt-3">
+	    	<div class="col text-center pb-3">
+	    		<strong class="text-secondary">
+	    			Already have an account? <a href="{% url 'accounts:login' %}">Login</a>
+	    		</strong>
+	    	</div>
+	    </div>
+	</div>
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div style="margin-top: 160px"></div>
+    <div style="opacity: 0.96" class="card bg-light col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+        <h3 class="card-title p-0 mb-0 mt-2">
+            <strong>RevealSecret Login</strong>
+        </h3>
+        <hr>
+        <div class="card-body m-0 p-0">
+            <div class="alert alert-danger p-1 pl-2 m-0 mb-3">
+                <a class="close" data-dismiss="alert">×</a>
+                {% if form.non_field_errors %}
+                    {{ form.non_field_errors|first }}
+                {% else %}
+                    Both fields are required
+                {% endif %}
+            </div>
+
+            <form action="" method="POST">{% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <div class="text-left">
+                    <button class=" btn btn-sm btn-primary" type="submit"> 
+                        <i class="fa fa-sign-in"></i>&nbsp;Login
+                    </button>&nbsp;&nbsp;<a href="">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="row mt-3">
+            <div class="col card-footer text-right">
+                New to RevealSecret?&nbsp;&nbsp;<a  class="btn btn-sm btn-primary" href="{% url 'accounts:register' %}">
+                    <i class="fa fa-user-plus"></i>&nbsp;Register</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

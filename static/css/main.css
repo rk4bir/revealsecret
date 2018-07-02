@@ -1,0 +1,150 @@
+
+/* DEFAULT DESIGN FIX */
+body{
+    margin: 0 auto;
+    font-family: arial, helvetica, sans-serif;
+    background: rgb(245,245,245) url('../img/favicon.png') center center no-repeat fixed;
+    background-size: cover;
+    font-size: 1.0em;
+}
+
+
+/* OVERRIDE AND CUSTOM DESIGNS */
+
+.container{
+	max-width: 960px !important;
+}
+
+.content_container{
+	margin-top: 60px;
+	min-height: 600px;
+}
+
+
+.form-control:focus{
+    border: 1px solid darkgreen;
+    box-shadow:  none !important;
+}
+
+.custom-color-dark{
+  background-color:#00695c!important
+}
+
+
+.profile_tab_menu{
+  text-align: right;
+  border-bottom: 1px solid black;
+}
+.profile_tab_menu li{
+  list-style: none;
+  display: inline-block;
+}
+
+.profile_tab_menu li a, .profile_tab_menu li a:link, .profile_tab_menu li a:visited{
+  color: darkgreen;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.0em;
+}
+.profile_tab_menu li a:hover{
+  text-decoration: underline;
+}
+.tab_menu_active{
+  color: gray !important;
+}
+
+.btn_custom{
+  background-color: green;
+}
+.setting_active{
+  background: darkblue;
+  border: 1px solid darkblue;
+}
+
+
+
+.list_style_none li{
+    list-style: none;
+}
+
+
+.active_link{background: #005000;}
+
+.s1{background: #005000;}
+.s2{background: #005000;}
+.s3{background: #005000;}
+
+
+
+
+
+
+
+
+
+
+/*    641px ~ 767px    */
+@media screen
+  and (min-device-width: 641px)
+  and (max-device-height: 767px){
+
+
+    .field-label-responsive {
+    padding-top: .5rem;
+    text-align: right;
+  }
+}
+
+
+
+/*    481px ~ 640px    */
+@media screen
+  and (min-device-width: 481px)
+  and (max-device-height: 640px){
+    
+}
+
+
+/*    320px ~ 480px    */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px){
+
+}
+
+/*    280px ~ 319px    */
+@media only screen
+  and (min-device-width: 280px)
+  and (max-device-width: 319px){
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

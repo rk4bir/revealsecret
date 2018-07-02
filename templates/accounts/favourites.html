@@ -1,0 +1,59 @@
+{% if favourites %}
+	{% for message in favourites %}
+		<p class="text-primary text-left">{{ message.content }}</p>
+		<ul class="nav pl-0">
+			<li class="pl-0 nav-link">
+				{% if not message.is_fav %}
+					<form method="POST" action="{% url 'messages:favourite' message.pk %}">{% csrf_token %}
+						<button type="submit" class="btn btn-sm btn-success">
+							<i class="fa fa-heart-o" aria-hidden="true"></i>
+						</button>
+					</form>
+				{% else %}
+					<button class="btn btn-sm btn-success">
+						<i class="fa fa-heart" aria-hidden="true"></i>
+					</button>
+				{% endif %}
+			</li>
+			<li class="pl-0 nav-link">
+				<form method="POST" action="{% url 'messages:delete' message.pk %}">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-sm btn-danger">
+						<i class="fa fa-trash-o" aria-hidden="true"></i>
+					</button>
+				</form>
+			</li>
+		</ul>
+		<hr>
+	{% endfor %}
+{% else %}
+	<h5 class="text-danger">Nothing to show!</h5>
+{% endif %}
+<!-- PAGINATION -->
+{% if favourites.has_other_pages %}
+    <style>
+        ul li{
+            margin-right: 1px;
+        }
+    </style>
+    <ul class="pagination">
+        {% if favourites.has_previous %}
+          <li><a class="btn btn-sm btn-primary" href="?tab=favourites&&page={{ favourites.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="btn btn-sm btn-primary disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in favourites.paginator.page_range %}
+          {% if favourites.number == i %}
+            <li class="active btn btn-sm btn-primary"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a class="btn btn-sm btn-primary" href="?tab=favourites&&page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if favourites.has_next %}
+          <li><a class="btn btn-sm btn-primary" href="?tab=favourites&&page={{ favourites.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class=" btn btn-sm btn-primary disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+{% endif %}
+<!-- PAGINATION -->

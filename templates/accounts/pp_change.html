@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Profile settings{% endblock title %}
+
+{% block content %}
+	<div style="margin-top: 180px"></div>
+	<div class="row card bg-light pb-3">		
+		<div class="row">
+			<div style="border-radius: 30px" class="col bg-success text-light pt-2 pb-1 mb-3">
+				<h4 class="text-center">
+	                <i class="fa fa-cog"></i> Settings
+	            </h4>
+	        </div>
+		</div>
+		{% if messages %}
+	        {% for message in messages %}
+	            <span class="text-info mb-2">{{ message }}</span>
+	        {% endfor %}
+	    {% endif %}
+        <style>
+			.btn-success{width: 100px}
+            label{
+                font-weight: bold;
+                color: darkred;
+                text-align: left;
+                margin-bottom: 0px;
+            }
+        </style>
+	        <div class="row p-2 text-left panel-body">
+	            <ul class="list_style_none col-md-3" style="padding-left: 50px;">
+	                <li>
+	                    <a class="text-left btn btn-sm btn-success mb-1" href="{% url 'accounts:settings' request.user.username %}?action=edit"><i class="fa fa-edit" aria-hidden="true"></i>&nbsp;Edit</a>
+	                </li>
+	                <li>
+	                    <a class="{{ active }} text-left btn btn-sm btn-success mb-1" href="{% url 'accounts:pp_upload' request.user.username %}"><i class="fa fa-photo" aria-hidden="true"></i>&nbsp;Photo</a>
+	                </li>
+	                <li>
+	                    <a class="text-left btn btn-sm btn-success mb-1" href="{% url 'accounts:settings' request.user.username %}?action=change"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Password</a>
+	                </li>
+	                <li>
+	                    <a class="text-left btn btn-sm btn-success mb-1" href="{% url 'accounts:settings' request.user.username %}?action=delete"><i class="fa fa-user-times" aria-hidden="true"></i>&nbsp;Delete</a>
+	                </li>
+	            </ul>
+	            <style type="text/css">
+	            	.errorlist li{
+	            		display: none !important;
+	            	}
+	            </style>
+	            <div class="col-md-9" style="padding-right: 30px; padding-left: 50px">
+	
+		            <form action="" method="POST" enctype="multipart/form-data">
+		            	{% csrf_token %}
+		            	{{ form }}
+		            	<br>
+		            	<div>
+			            	<button class="btn btn-sm btn-success mt-3 mb-3" type="submit">
+			            		<i class="fa fa-upload"></i> Upload
+			            	</button>
+			            </div>
+			        </form>
+	            </div>
+	        </div>
+	</div>
+{% endblock content %}
