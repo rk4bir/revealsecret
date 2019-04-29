@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+	Message to {{ account.user.username}}
+{% endblock title %}
+
+
+
+
+{% block content %}
+	<div style="margin-top: 60px"></div>
+	<div class="row card pt-3 bg-dark" style="opacity: 0.96">
+		{% if messages %}
+	        {% for message in messages %}
+	            <span class="text-success mb-2">{{ message }}</span>
+	        {% endfor %}
+	    {% endif %}
+		<div class="col-sm-4 offset-sm-4 offset-2">
+			{% if account.user.username == 'raihan' %}
+				<img  src="{% static 'img/raihan.jpg' %}"  class="img-thumbnail" alt="Profile Photo">
+			{% else %}	
+				{% if account.pp %}
+					<img  src="{{ account.pp.url }}"  class="img-thumbnail" alt="Profile Photo">
+				{% else %}
+					<img  src="{% static 'img/no_pp.png' %}"  class="img-thumbnail" alt="Profile Photo">
+				{% endif %}
+			{% endif %}
+		</div>
+		<h4 class="card-title mt-2 mb-1 text-light">
+			{{ account.get_profile_name }}
+		</h4>
+
+		<h6 class="card-title mt-0">
+			<span style='font-size:0.8em' class="text-light fa fa-envelope-o"></span><a style="text-decoration: none;" class="text-success" href="{{ account.get_send_message_link }}">
+				<small>https://revealsecret.herokuapp.com/{{ account.user.username }}/</small>
+			</a>
+		</h6>
+
+		<div class="bg-white pt-4">	
+			<h4 class="text-info"><strong>
+				<i class="fa fa-quote-left"></i> Leave a message <i class="fa fa-quote-right"></i>
+			</strong></h4>
+			{% if error != '' %}
+				<p class="text-danger mb-0 pb-0">
+					{{ error }}
+				</p>
+			{% endif %}
+			
+			<div class="col">
+				<form action="" method="POST">{% csrf_token %}
+					<textarea id="message" class="form-control mt-2 mb-2"style="height: 160px;" name="message" placeholder="Message"></textarea>
+					<div  class="text-center">
+						<small id="showRemain">
+							<span class="text-secondary">
+								Message shall not exceed 260 characters
+							</span>
+						</small>
+					</div>
+					<div class="text-right">
+						<button type="submit" class="btn btn-sm btn-info mb-5" value="Send">
+							<i class="fa fa-send-o">&nbsp;&nbsp;Send</i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+{% endblock content %}

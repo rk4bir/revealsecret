@@ -1,0 +1,126 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
+    <title>{% block title %}Say what you want and stay anonymous{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link href="{% static 'bootstrap-4.0/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+ <!--Main Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark custom-color-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" toggle-data='tooltip' title="RevealSecret: Say anything being anonymous" data-placement="bottom" href="{% url 'homepage' %}">
+            REVEALSECRET
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navdata" aria-controls="navdata"
+        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse " id="navdata">
+            <ul class="navbar-nav mr-auto">
+                    <li class="nav-item {{ about_active }}">
+                        <a class="nav-link" href="{% url 'about' %}">
+                            <i class="fa fa-bullhorn"></i> About</a>
+                    </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item {{ messages_active }}">
+                        <a class="nav-link" href="{% url 'accounts:settings' request.user.username %}" toggle-data='tooltip' title="Settings" data-placement="bottom">
+                            <i class="fa fa-cog"></i> Settings
+                        </a>
+                    </li>
+                    <li class="nav-item {{ profile_active }}">
+                        <a class="nav-link " href="{% url 'accounts:profile' request.user.username %}" toggle-data='tooltip' title="Profile" data-placement="bottom">
+                            <i class="fa fa-user-circle"></i> {{ request.user.username }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+             <ul class="navbar-nav ml-auto nav-flex-icons">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect waves-light">{{ msgNo }}&nbsp;<i class="fa fa-envelope"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect waves-light">{{ fav_msgNo }}&nbsp;<i class="fa fa-heart-o"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect waves-light">{{ sent_msgNo }}&nbsp;<i class="fa fa-paper-plane-o"></i></a>
+                    </li>
+                {% else %}
+                    <li class="nav-item {{ register_active }}">
+                        <a href="{% url 'accounts:register' %}" class="nav-link waves-effect waves-light" toggle-data='tooltip' title="Sign Up" data-placement="bottom">
+                            <i class="fa fa-user-plus"></i> Register
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect waves-light">
+                            |
+                        </a>
+                    </li>
+                    <li class="nav-item {{ login_active }}">
+                        <a href="{% url 'accounts:login' %}" class="nav-link waves-effect waves-light" toggle-data='tooltip' title="Sign In" data-placement="bottom">
+                            <i class="fa fa-sign-in"></i> Login
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container content_container text-center">
+    {% block content %}
+        <div style="opacity: 0.96" class=" row card text-left p-5">
+            {% if messages %}
+                {% for message in messages %}
+                    <span class="text-success mb-2">{{ message }}</span>
+                {% endfor %}
+            {% endif %}
+            <h3 class="text-success">SECRETREVEAL</h3>
+            <hr>
+            
+            <h4>What is my message-inbox address?</h4>
+            <p>-It's in your profile something like <small class="text-success"> https::/revealsecret.herokuapp.com/yourusername/</small></p>
+            <br>
+            <br>
+            
+            <h4>Who can send me messages?</h4><br>
+            <p>-Anyone who got your message/inbox address</p>
+            <br>
+            <br>
+            
+            <li>
+                Let your friedns write about you keeping their identity anonymous
+            </li><br>
+            <li>Get feedback about you from your friends and co-workers</li><br>
+            <li>Let them say who are afraid to tell in front of you</li><br>
+            <li>Let them say who are shy/worried to tell something with their identity</li>
+            <br>
+        </div>
+    {% endblock content %}
+</div>
+<div style="margin-top: 30px"></div>
+<footer style="background-color: #00695c" class=" text-white pt-2 pb-2">
+    <div class="text-center">
+        &copy; All rights reserved RevealSecret 2018
+    </div>
+</footer>
+    <script type="text/javascript" src="{% static 'js/jquery-v3.2.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-4.0/js/proper.min.js' %}"></script>
+    <script src="{% static 'bootstrap-4.0/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
