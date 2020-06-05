@@ -5,7 +5,7 @@ colorama==0.3.9
 decorator==4.3.0
 defusedxml==0.5.0
 dj-database-url==0.5.0
-Django==2.0.5
+Django==2.2.13
 django-heroku==0.3.1
 django-sslify==0.2.7
 gunicorn==19.7.1
